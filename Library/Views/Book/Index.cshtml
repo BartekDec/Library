@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Repo.Models.Book>
+
+@{
+    ViewBag.Title = "Available Books";
+}
+
+<h2>@ViewBag.Title</h2>
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Librarian")))
+{
+<p>
+    @Html.ActionLink("Create New Book", "Create",null, new { @class = "btn btn-primary" })
+</p>
+}
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </th>
+        @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Librarian")))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.Isbn)
+            </th>
+        }
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Page)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Publisher)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicationYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Available)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr style="font-size:95%;">
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Librarian")))
+{
+    <td>
+        @Html.DisplayFor(modelItem => item.Isbn)
+    </td>
+}
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Page)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publisher)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublicationYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Available)
+        </td>
+        <td>
+           @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Librarian")))
+           {
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success", @style = "font-size: 80%;" })
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info", @style ="font-size: 80%;"})
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger", @style = "font-size: 80%;" })
+
+       }
+           else
+           {
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+           }
+        </td>
+    </tr>
+}
+
+</table>

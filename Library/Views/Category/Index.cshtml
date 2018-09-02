@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Repo.Models.Category>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>@ViewBag.Title</h2>
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Librarian")))
+{
+    <p>
+        @Html.ActionLink("Create New Category", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th class="thStyle">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class ="trStyle">
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+      <td>
+
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Librarian")))
+{
+    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" }) 
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" }) 
+@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+
+}
+else
+{
+    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+}
+
+
+
+        </td>
+
+    </tr>
+}
+
+</table>

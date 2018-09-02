@@ -1,0 +1,83 @@
+﻿@model Repo.Models.Order
+
+@{
+    ViewBag.Title = "Order Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Author)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Publisher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Publisher)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.PublicationYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.PublicationYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceptionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceptionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class="btn btn-success"})
+    }
+    
+</p>
+<div>
+    <ul class="pager">
+        <li class="previous"><a href="@Url.Action("MyOrder")"><span aria-hidden="true">&larr;</span> Back to List</a></li>
+
+
+    </ul>
+
+</div>

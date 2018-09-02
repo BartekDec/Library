@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @*<script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+    @RenderSection("Scripts", false/*required*/)*@
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               
+
+                @Html.ActionLink("School Library", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+               
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                   
+                    <li><a href=@Url.Action("Index", "Home")> <i class="fa fa-home fa-2x"> </i></a></li>
+
+                  
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
+                {
+                    <li>@Html.ActionLink("All Orders", "Index", "Order")</li>
+                }
+                    
+
+                <li> @Html.ActionLink("New Order", "Create", "Order")</li>
+                <li> @Html.ActionLink("My Orders", "MyOrder", "Order")</li>
+
+            </ul>
+        </li>
+    }
+    else
+    {
+                    <li>@Html.ActionLink("Order", "Login", "Account")</li>
+                    
+    }
+              
+                    
+
+                 
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
+                            {
+                                <li>@Html.ActionLink("Add Category", "Create", "Category")</li>
+                            }
+                            <li>@Html.ActionLink("Display Categories", "Index", "Category")</li>
+
+                            
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Books<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
+                            {
+                                <li>@Html.ActionLink("Add Book", "Create", "Book")</li>
+                            }
+                     
+                            <li>@Html.ActionLink("Display Books", "Index", "Book")</li>
+
+                        </ul>
+                    </li>
+
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+        </footer>
+    </div>
+        <footer>
+            <div class="footer">
+                <div class="container">
+                    <div class="social-icon">
+                        <div class="col-md-3">
+                            <ul class="social-network">
+                                <li><a href="#" class="fb tool-tip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#" class="instagram tool-tip" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="#" class="linkedin tool-tip" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="footerContact">
+                            <p><i class="fa fa-map-marker"></i> School Library</p>
+                            <p>ul.Radzikowskiego 80</p>
+                            <p>31-315 Cracow</p>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="footerContact">
+                            <p><i class="fa fa-phone"></i>+48 692 385 525</p>
+                            <p><i class="fa fa-envelope"></i> school.library@gmail.com</p>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="footerContact">
+                            <p>Monday to Friday</p>
+                            <p>8.00 - 15.00</p>
+                        </div>
+
+                    </div>
+
+                    
+                </div>
+
+                @*<div class="pull-right">
+                    <a href="#home" class="scrollup"><i class="fa fa-angle-up fa-3x"></i></a>
+                </div>*@
+            </div>
+        </footer>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

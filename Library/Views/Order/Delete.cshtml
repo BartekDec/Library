@@ -1,0 +1,94 @@
+﻿@model Repo.Models.Order
+
+@{
+    ViewBag.Title = "Delete Order";
+}
+
+<h2>@ViewBag.Title</h2>
+@if(ViewBag.Error == true)
+{
+    <div class="alert alert-danger" role="alert">
+        Error occured
+        Try again
+
+    </div>
+}
+<h3>Are you sure you want to delete this order?</h3>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Author)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Publisher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Publisher)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceptionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceptionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnDate)
+        </dd>
+
+    </dl>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" />
+        </div>
+    </div>
+
+    <div>
+        <ul class="pager">
+            <li class="previous"><a href="@Url.Action("MyOrder")"><span aria-hidden="true">&larr;</span> Back to List</a></li>
+
+
+        </ul>
+
+    </div>
+
+</div>
+}
